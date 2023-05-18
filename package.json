@@ -16,20 +16,16 @@
     {
       "name": "asciitext",
       "title": "Asciitext",
-      "subtitle": "Generate ASCII ",
+      "subtitle": "Generate ASCII text",
       "description": "Convert any text in ASCII Art",
-      "mode": "view"
-    },
-    {
-      "name": "asciitextconfig",
-      "title": "AsciitextConfig",
-      "subtitle": "Configure",
-      "description": "Select Figlet font",
       "mode": "view"
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.48.8"
+    "@raycast/api": "^1.48.8",
+    "@types/fs-extra": "^11.0.1",
+    "ascii-art-font": "^1.0.2",
+    "fs-extra": "^11.1.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",
@@ -40,10 +36,11 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "build": "ray build -e dist",
-    "dev": "ray develop",
-    "fix-lint": "ray lint --fix",
-    "lint": "ray lint",
-    "publish": "ray publish"
+    "prepare": "node scripts/generateFontListFile.js",
+    "build": "npm run prepare && ray build -e dist",
+    "dev": "npm run prepare && ray develop",
+    "fix-lint": "npm run prepare && ray lint --fix",
+    "lint": "npm run prepare && ray lint",
+    "publish": "npm run prepare && ray publish"
   }
 }
